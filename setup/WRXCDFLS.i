@@ -1135,9 +1135,17 @@ LOCALPROC WriteAPBXCDBuildSettings(void)
 			WriteDestFileLn("LD_NO_PIE = YES;");
 		}
 	}
+	WriteAPBQuotedField("HEADER_SEARCH_PATHS",
+		gbk_cpufam_a64 == gbo_cpufam ?
+		"/opt/homebrew/include" :
+		"/usr/local/include");
 	if (ide_vers < 1500) {
 		WriteAPBQuotedField("LIBRARY_SEARCH_PATHS", "");
-	}
+	} else
+		WriteAPBQuotedField("LIBRARY_SEARCH_PATHS",
+			gbk_cpufam_a64 == gbo_cpufam ?
+			"/opt/homebrew/lib" :
+			"/usr/local/lib");
 	if (ide_vers >= 2100) {
 		if (gbk_cpufam_ppc == gbo_cpufam) {
 			WriteDestFileLn("MACOSX_DEPLOYMENT_TARGET = 10.1;");
@@ -1150,7 +1158,7 @@ LOCALPROC WriteAPBXCDBuildSettings(void)
 				WriteDestFileLn("MACOSX_DEPLOYMENT_TARGET = 10.9;");
 			} else
 			if (ide_vers >= 9000) {
-				WriteDestFileLn("MACOSX_DEPLOYMENT_TARGET = 10.6;");
+				WriteDestFileLn("MACOSX_DEPLOYMENT_TARGET = 10.7;");
 			} else
 			{
 				WriteDestFileLn("MACOSX_DEPLOYMENT_TARGET = 10.4;");
@@ -1182,6 +1190,11 @@ LOCALPROC WriteAPBXCDBuildSettings(void)
 				WriteDestFileLn("\"-lXext\",");
 #endif
 				WriteDestFileLn("\"-lX11\",");
+			WriteAPBXCDEndObjList();
+		}
+		else if (gbk_apifam_sd2 == gbo_apifam) {
+			WriteAPBXCDBgnObjList("OTHER_LDFLAGS");
+			WriteDestFileLn("\"-lSDL2\",");
 			WriteAPBXCDEndObjList();
 		}
 	}

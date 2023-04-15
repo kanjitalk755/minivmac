@@ -235,11 +235,18 @@ static void DoAllSrcFiles(tDoOneCFile p)
 		kCSrcFlgmUseAPI
 			| CSrcFlagsUseSrcIf(gbk_apifam_gtk == gbo_apifam),
 		DoOSGLUdepends);
-	p("OSGLUSDL", kDepDirCSrc,
-		kCSrcFlgmUseAPI
-			| CSrcFlagsUseSrcIf((gbk_apifam_sdl == gbo_apifam)
-				|| (gbk_apifam_sd2 == gbo_apifam)),
-		DoOSGLUdepends);
+	if (gbk_targfam_mach == gbo_targfam)
+		p("OSGLUSDL", kDepDirCSrc,
+			kCSrcFlgmUseAPI | kCSrcFlgmOjbc
+				| CSrcFlagsUseSrcIf((gbk_apifam_sdl == gbo_apifam)
+					|| (gbk_apifam_sd2 == gbo_apifam)),
+			DoOSGLUdepends);
+	else
+		p("OSGLUSDL", kDepDirCSrc,
+			kCSrcFlgmUseAPI
+				| CSrcFlagsUseSrcIf((gbk_apifam_sdl == gbo_apifam)
+					|| (gbk_apifam_sd2 == gbo_apifam)),
+			DoOSGLUdepends);
 	p("OSGLUCCO", kDepDirCSrc,
 		kCSrcFlgmUseAPI | kCSrcFlgmOjbc
 			| CSrcFlagsUseSrcIf(gbk_apifam_cco == gbo_apifam),

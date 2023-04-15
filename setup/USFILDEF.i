@@ -334,6 +334,8 @@ static void DoAllFrameWorks(tWriteOneFrameWorkType p)
 		p("AGL");
 #endif
 	}
+	if (gbk_apifam_sd2 == gbo_apifam)
+		p("Cocoa");
 }
 
 struct DoFrameWork_r
