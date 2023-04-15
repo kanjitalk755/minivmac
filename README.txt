@@ -1,18 +1,3 @@
-Mini vMac runs emulation and drawing in a single thread.
-Because of that, if drawing is blocked for some reason, the emulation speed will drop.
-So I tried to separate the drawing to another thread in the macOS/SDL2 version.
-Try if the CPU load does not reach 100% even with the speed setting "All out".
-
-preparation:
-$ brew install sdl2
-
-example of how to build:
-$ cc -o tool setup/tool.c
-$ ./tool -t mcar -m II -api sd2 -speed a -as 0 | sh
-$ xcodebuild
-
-----------------
-
 MnvM_b37: README
 Paul C. Pratt
 www.gryphel.com
