@@ -4944,10 +4944,10 @@ int main(int argc, char **argv)
 			while (!f) {
 				while (gBackgroundFlag && !RunInBackground)
 					usleep(10000);
-		#if EnableFSMouseMotion
+#if EnableFSMouseMotion
 				if (HaveMouseMotion)
 					AutoScrollScreen();
-		#endif
+#endif
 				MyDrawChangesAndClear();
 			}
 			f = -1;
